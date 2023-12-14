@@ -24,10 +24,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addCar'])) {
     $licensePlate = $_POST['licensePlate'];
     $availability = isset($_POST['availability']) ? 1 : 0; // Assuming a checkbox for availability
 
-    // Add your logic to insert the car into the database using the Admin class
-    // Example: $admin->addCar($brand, $model, $year, $licensePlate, $availability);
-    // Don't forget to implement the 'addCar' method in your Admin class
-    // Redirect or display a success message as needed
+    // Handle image upload
+    if (isset($_FILES['carImage'])) {
+        $carImage = $_FILES['carImage'];
+
+        // Add your logic to insert the car into the database using the Admin class
+        // Example: $admin->addCar($brand, $model, $year, $licensePlate, $availability, $carImage);
+        // Don't forget to implement the 'addCar' method in your Admin class
+        // Redirect or display a success message as needed
+        $admin->addCar($brand, $model, $year, $licensePlate, $availability, $carImage);
+    } else {
+        // Handle the case where no image is uploaded
+        echo "Please upload an image.";
+    }
+    
 }
 ?>
 
@@ -52,30 +62,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addCar'])) {
     <h3>Manage Cars:</h3>
 
     <!-- Car Addition Form -->
-    <form method="post" action="" enctype="multipart/form-data">
-        <label for="brand">Brand:</label>
-        <input type="text" id="brand" name="brand" required>
+<form method="post" action="" enctype="multipart/form-data">
+    <label for="brand">Brand:</label>
+    <input type="text" id="brand" name="brand" required>
 
-        <label for="model">Model:</label>
-        <input type="text" id="model" name="model" required>
+    <label for="model">Model:</label>
+    <input type="text" id="model" name="model" required>
 
-        <label for="year">Year:</label>
-        <input type="number" id="year" name="year" required>
+    <label for="year">Year:</label>
+    <input type="number" id="year" name="year" required>
 
-        <label for="licensePlate">License Plate:</label>
-        <input type="text" id="licensePlate" name="licensePlate" required>
+    <label for="licensePlate">License Plate:</label>
+    <input type="text" id="licensePlate" name="licensePlate" required>
 
-        <label for="availability">Availability:</label>
-        <input type="checkbox" id="availability" name="availability">
+    <label for="availability">Availability:</label>
+    <input type="checkbox" id="availability" name="availability">
 
-        <label for="carImage">Car Image:</label>
-    <input type="file" id="carImage" name="carImage" accept="image/*">
+    <label for="carImage">Car Image:</label>
+    <input type="file" id="carImage" name="carImage" accept="image/*" required>
 
     <button type="submit" name="addCar">Add Car</button>
-    </form>
+</form>
+
+
 
     <!-- Display List of Cars -->
     <?php
+    
     // Add PHP code to fetch and display list of cars
     ?>
 

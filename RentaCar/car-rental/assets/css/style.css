@@ -124,3 +124,51 @@ footer {
 .login-form button:hover {
     background-color: #3c78d8; /* Darker shade of Google Blue */
 }
+/* Add these styles to your existing style.css file */
+
+.car-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.car-item {
+    position: relative;
+}
+
+.details-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.details-box {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: left;
+}
+
+.car-item:hover .details-box {
+    display: block;
+}
+
+.rent-btn {
+    background-color: #27ae60;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}

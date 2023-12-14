@@ -1,7 +1,7 @@
 <?php
 // Include the Admin and User classes
-require_once('../classes/Admin.php');
-require_once('../classes/User.php');
+require_once('../../classes/Admin.php');
+require_once('../../classes/User.php');
 
 // Initialize the session if not already started
 if (session_status() == PHP_SESSION_NONE) {
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['admin'] = $loggedInAdmin;
 
         // Redirect to admin dashboard upon successful login
-        header("Location: admin-dashboard.php");
+        header("Location: ../admin-dashboard.php");
         exit();
     } else {
         // Attempt to log in the regular user
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user'] = $loggedInUser;
 
             // Redirect regular users to the home page or their dashboard
-            header("Location: index.php");
+            header("Location: /car-rental/index.php");
             exit();
         } else {
             // Handle login failure
@@ -57,12 +57,12 @@ $user->closeConnection();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Car Rental</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- Add any additional CSS or JavaScript dependencies here -->
 </head>
 <body>
 
-    <?php include('../includes/header.php'); ?>
+    <?php include('../../includes/header.php'); ?>
 
     <div class="container">
         <h2>Login</h2>
@@ -84,7 +84,7 @@ $user->closeConnection();
         </form>
     </div>
 
-    <?php include('../includes/footer.php'); ?>
+    <?php include('../../includes/footer.php'); ?>
 
     <!-- Add any additional JavaScript at the end of the body if needed -->
 

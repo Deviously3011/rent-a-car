@@ -38,18 +38,15 @@ class Admin {
     public function closeConnection() {
         $this->db->closeConnection();
     }
-    public function addCar($make, $model, $year, $price, $imagePath) {
-        $sql = "INSERT INTO cars (make, model, year, price, image_path) VALUES (?, ?, ?, ?, ?)";
+    public function addCar($brand, $model, $year, $licensePlate, $availability, $carImage) {
+        $sql = "INSERT INTO cars (Brand, Model, Year, LicensePlate, Availability, Image) VALUES (?, ?, ?, ?, ?, ?)";
         
         // Use try-catch block for error handling
         try {
-            // Check if the file exists before attempting to move it
-            if (!file_exists($imagePath)) {
-                throw new Exception("Image file not found at: " . $imagePath);
-            }
+            // Assuming $carImage is an array from $_FILES
+            $imagePath = $this->uploadImage($carImage); // Implement the image upload function
     
-            $stmt = $this->db->query($sql, [$make, $model, $year, $price, $imagePath]);
-    
+            $stmt = $this->db->query($sql, [$brand, $model, $year, $licensePlate, $availability, $imagePath]);
             // Check if the query was successful
             if ($stmt) {
                 return true; // Success
@@ -57,11 +54,36 @@ class Admin {
                 throw new Exception("Error executing query: " . $stmt->error);
             }
         } catch (Exception $e) {
-            // Log the error or handle it as needed
-            error_log("Error adding car: " . $e->getMessage());
+            echo "Error: " . $e->getMessage();
             return false; // Failed
         }
     }
+    public function uploadImage($carImage) {
+        $targetDirectory = "../assets/img/";
+    
+        // Ensure the target directory exists; create it if not
+        if (!file_exists($targetDirectory)) {
+            mkdir($targetDirectory, 0777, true);
+        }
+    
+        // Get the original name of the uploaded file
+        $originalFileName = $carImage["name"];
+    
+        // Generate a unique filename to prevent conflicts
+        $uniqueFileName = uniqid() . '_' . $originalFileName;
+    
+        // Construct the full path to the target file
+        $targetFile = $targetDirectory . $uniqueFileName;
+    
+        // Move the uploaded file to the target directory
+        if (move_uploaded_file($carImage["tmp_name"], $targetFile)) {
+            return $targetFile; // Return the path to the uploaded file
+        } else {
+            throw new Exception("Error uploading image.");
+        }
+    }
+    
+    
     
     
 }

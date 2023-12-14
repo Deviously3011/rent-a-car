@@ -35,13 +35,13 @@ if (session_status() == PHP_SESSION_NONE) {
 
                     // Check if the user is logged in
                     if (isset($_SESSION['user'])) {
-                        echo '<a href="/car-rental/pages/logout.php">Logout</a>';
+                        echo '<a href="/car-rental/pages/login_pages/logout.php">Logout</a>';
                     } elseif (isset($_SESSION['admin'])) {
-                        echo '<a href="/car-rental/pages/logout.php">Logout</a>';
+                        echo '<a href="/car-rental/pages/login_pages/logout.php">Logout</a>';
                         echo '<a href="/car-rental/pages/admin-dashboard.php">Admin Dashboard</a>';
                     } else {
-                        echo '<a href="/car-rental/pages/login.php">Login</a>';
-                        echo '<a href="/car-rental/pages/signup.php">Signup</a>';
+                        echo '<a href="/car-rental/pages/login_pages/login.php">Login</a>';
+                        echo '<a href="/car-rental/pages/login_pages/signup.php">Signup</a>';
                     }
                     ?>
                 </div>

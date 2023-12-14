@@ -5,6 +5,7 @@ car-rental/
 |   |   |-- style.css
 |   |-- js/
 |   |   |-- main.js
+|   |-- img/
 |-- classes/
 |   |-- Database.php
 |   |-- User.php
@@ -16,11 +17,15 @@ car-rental/
 |   |-- header.php
 |   |-- footer.php
 |-- pages/
+|   |-- login_pages/
+|   |   |-- login.php
+|   |   |-- logout.php
+|   |   |-- signup.php
+|   |-- Renting/
+|   |   |-- checkout.php
+|   |   |-- rent.php
 |   |-- index.php
-|   |-- signup.php
-|   |-- login.php
 |   |-- dashboard.php
-|   |-- admin-dashboard.php
 |   |-- admin-dashboard.php
 |-- .gitignore
 |-- index.php

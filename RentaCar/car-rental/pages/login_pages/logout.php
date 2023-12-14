@@ -1,6 +1,6 @@
 <?php
 // Include the User class
-require_once('../classes/User.php');
+require_once('../../classes/User.php');
 
 // Initialize the session if not already started
 if (session_status() == PHP_SESSION_NONE) {
@@ -14,6 +14,6 @@ $user = new User();
 $user->logout();
 
 // Redirect to the homepage after logout
-header("Location: index.php");
+header("Location: /car-rental/index.php");
 exit();
-?>
+

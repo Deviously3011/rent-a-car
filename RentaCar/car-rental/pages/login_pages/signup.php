@@ -1,6 +1,6 @@
 <?php
 // Include the User class
-require_once('../classes/User.php');
+require_once('../../classes/User.php');
 
 // Initialize the session if not already started
 if (session_status() == PHP_SESSION_NONE) {
@@ -39,12 +39,12 @@ $user->closeConnection();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup - Car Rental</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- Add any additional CSS or JavaScript dependencies here -->
 </head>
 <body>
 
-    <?php include('../includes/header.php'); ?>
+    <?php include('../../includes/header.php'); ?>
 
     <div class="container">
         <h2>Signup</h2>
@@ -75,7 +75,7 @@ $user->closeConnection();
  
     </div>
 
-    <?php include('../includes/footer.php'); ?>
+    <?php include('../../includes/footer.php'); ?>
 
     <!-- Add any additional JavaScript at the end of the body if needed -->
 
