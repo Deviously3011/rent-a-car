@@ -1,0 +1,126 @@
+ 
+/* Reset some default styles */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
+header {
+    background-color: #4285f4; /* Google Blue */
+    color: #fff;
+    padding: 10px 0;
+}
+
+.upper-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.login-signup-container a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+/* Bottom navbar styles */
+.bottom-navbar {
+    margin-top: 20px;
+}
+
+.bottom-navbar ul {
+    list-style: none;
+    display: flex;
+}
+
+.bottom-navbar li {
+    margin-right: 20px;
+}
+
+.bottom-navbar a {
+    color: #4285f4; /* Google Blue */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Main content styles */
+h1, h2, h3 {
+    color: #4285f4; /* Google Blue */
+}
+
+/* Footer styles */
+footer {
+    margin-top: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .upper-navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .login-signup-container {
+        margin-top: 10px;
+    }
+
+    .bottom-navbar {
+        margin-top: 10px;
+    }
+
+    .bottom-navbar ul {
+        flex-direction: column;
+    }
+
+    .bottom-navbar li {
+        margin-bottom: 10px;
+    }
+}
+/* login styles */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.login-form label,
+.login-form input,
+.login-form button {
+    margin-bottom: 15px;
+}
+
+.login-form button {
+    background-color: #4285f4; /* Google Blue */
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #3c78d8; /* Darker shade of Google Blue */
+}
