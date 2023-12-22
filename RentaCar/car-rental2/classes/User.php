@@ -33,7 +33,18 @@ class User {
     public function closeConnection() {
         $this->db->closeConnection();
     }
-    
+    public function getCustomerIdByEmail($email) {
+        $sql = "SELECT CustomerID FROM customers WHERE email = ?";
+        $result = $this->db->query($sql, [$email]);
+
+        if ($result instanceof mysqli_result && $result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+            $result->close(); // Close the result set
+            return $user['CustomerID'];
+        } else {
+            return null;
+        }
+    }
     
 }
 

@@ -14,7 +14,7 @@
 
 <body>
 
-    <?php include('includes/header.php'); ?>
+    <?php include('../includes/header.php'); ?>
     <!-- Include the header file -->
 
     <div class="container">
@@ -22,7 +22,7 @@
 
         <?php
         // Include the Car class
-        require_once('classes/Car.php');
+        require_once('../classes/Car.php');
 
         // Instantiate the Car class
         $car = new Car();
@@ -70,7 +70,7 @@
             </div>
             <div class="modal-body">
                 <!-- Rent form -->
-                <form action="checkout.php" method="post">
+                <form action="pages/Renting/checkout.php" method="post">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="firstName">First Name</label>
@@ -116,7 +116,7 @@
 </div>
 <!-- ... -->
 
-    <?php include('includes/footer.php'); ?>
+    <?php include('../includes/footer.php'); ?>
     <!-- Include the footer file -->
 
     <!-- Link to Bootstrap JS and Popper.js -->

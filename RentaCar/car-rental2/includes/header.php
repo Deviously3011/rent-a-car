@@ -25,7 +25,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <nav>
             <div class="upper-navbar">
                 <div class="logo">
-                    <a href="/car-rental/index.php">Car Rental</a>
+                    <a href="/car-rental2/index.php">Car Rental</a>
                 </div>
                 <div class="auth-buttons">
                     <?php
@@ -35,13 +35,13 @@ if (session_status() == PHP_SESSION_NONE) {
 
                     // Check if the user is logged in
                     if (isset($_SESSION['user'])) {
-                        echo '<a href="/car-rental/pages/login_pages/logout.php">Logout</a>';
+                        echo '<a href="/car-rental2/pages/login_pages/logout.php">Logout</a>';
                     } elseif (isset($_SESSION['admin'])) {
-                        echo '<a href="/car-rental/pages/login_pages/logout.php">Logout</a>';
-                        echo '<a href="/car-rental/pages/admin-dashboard.php">Admin Dashboard</a>';
+                        echo '<a href="/car-rental2/pages/login_pages/logout.php">Logout</a>';
+                        echo '<a href="/car-rental2/pages/admin-dashboard.php">Admin Dashboard</a>';
                     } else {
-                        echo '<a href="/car-rental/pages/login_pages/login.php">Login</a>';
-                        echo '<a href="/car-rental/pages/login_pages/signup.php">Signup</a>';
+                        echo '<a href="/car-rental2/pages/login_pages/login.php">Login</a>';
+                        echo '<a href="/car-rental2/pages/login_pages/signup.php">Signup</a>';
                     }
                     ?>
                 </div>

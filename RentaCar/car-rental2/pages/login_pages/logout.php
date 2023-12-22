@@ -14,6 +14,6 @@ $user = new User();
 $user->logout();
 
 // Redirect to the homepage after logout
-header("Location: /car-rental/index.php");
+header("Location: /car-rental2/index.php");
 exit();
 

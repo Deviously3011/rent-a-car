@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user'] = $loggedInUser;
 
             // Redirect regular users to the home page or their dashboard
-            header("Location: /car-rental/index.php");
+            header("Location: /car-rental2/index.php");
             exit();
         } else {
             // Handle login failure

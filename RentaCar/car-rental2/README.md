@@ -3,8 +3,7 @@ car-rental/
 |-- assets/
 |   |-- css/
 |   |   |-- style.css
-|   |-- js/
-|   |   |-- main.js
+|   |-- js/0 
 |   |-- img/
 |-- classes/
 |   |-- Database.php
@@ -20,10 +19,9 @@ car-rental/
 |   |-- login_pages/
 |   |   |-- login.php
 |   |   |-- logout.php
-|   |   |-- signup.php
+|   |   |-- signup.php  
 |   |-- Renting/
 |   |   |-- checkout.php
-|   |   |-- rent.php
 |   |-- index.php
 |   |-- dashboard.php
 |   |-- admin-dashboard.php
