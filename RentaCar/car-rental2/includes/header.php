@@ -18,39 +18,42 @@ if (session_status() == PHP_SESSION_NONE) {
     <title>Car Rental</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <!-- Add any additional CSS or JavaScript dependencies here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 
     <header>
-        <nav>
-            <div class="upper-navbar">
-                <div class="logo">
-                    <a href="/car-rental2/index.php">Car Rental</a>
-                </div>
-                <div class="auth-buttons">
-                    <?php
-                    // Initialize the User and Admin classes
-                    $user = new User();
-                    $admin = new Admin();
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="/car-rental2/index.php">Car Rental</a>
 
-                    // Check if the user is logged in
-                    if (isset($_SESSION['user'])) {
-                        echo '<a href="/car-rental2/pages/login_pages/logout.php">Logout</a>';
-                    } elseif (isset($_SESSION['admin'])) {
-                        echo '<a href="/car-rental2/pages/login_pages/logout.php">Logout</a>';
-                        echo '<a href="/car-rental2/pages/admin-dashboard.php">Admin Dashboard</a>';
-                    } else {
-                        echo '<a href="/car-rental2/pages/login_pages/login.php">Login</a>';
-                        echo '<a href="/car-rental2/pages/login_pages/signup.php">Signup</a>';
-                    }
-                    ?>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <?php
+                        // Initialize the User and Admin classes
+                        $user = new User();
+                        $admin = new Admin();
+
+                        // Check if the user is logged in
+                        if (isset($_SESSION['user'])) {
+                            echo '<li class="nav-item"><a class="nav-link" href="/car-rental2/pages/login_pages/logout.php">Logout</a></li>';
+                        } elseif (isset($_SESSION['admin'])) {
+                            echo '<li class="nav-item"><a class="nav-link" href="/car-rental2/pages/admin-dashboard.php">Admin Dashboard</a></li>';
+                            echo '<li class="nav-item"><a class="nav-link" href="/car-rental2/pages/manage-users.php">User Management</a></li>';
+                            echo '<li class="nav-item"><a class="nav-link" href="/car-rental2/pages/login_pages/logout.php">Logout</a></li>';
+                        } else {
+                            echo '<li class="nav-item"><a class="nav-link" href="/car-rental2/pages/login_pages/login.php">Login</a></li>';
+                            echo '<li class="nav-item"><a class="nav-link" href="/car-rental2/pages/login_pages/signup.php">Signup</a></li>';
+                        }
+                        ?>
+                    </ul>
                 </div>
-            </div>
-            <div class="bottom-navbar">
-                <!-- Add any additional navigation links here -->
             </div>
         </nav>
     </header>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

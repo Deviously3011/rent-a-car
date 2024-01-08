@@ -41,25 +41,34 @@ header {
     margin-left: 15px;
 }
 
-/* Bottom navbar styles */
-.bottom-navbar {
-    margin-top: 20px;
+/* Navbar styles */
+.navbar {
+    border-bottom: 1px solid #ddd; /* Add a border to separate the navbar from the content */
 }
 
-.bottom-navbar ul {
-    list-style: none;
+.navbar-nav {
     display: flex;
+    align-items: center;
 }
 
-.bottom-navbar li {
-    margin-right: 20px;
-}
-
-.bottom-navbar a {
+.navbar-nav .nav-link {
     color: #4285f4; /* Google Blue */
-    text-decoration: none;
+    margin-right: 20px;
     font-weight: bold;
 }
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .upper-navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .login-signup-container {
+        margin-top: 10px;
+    }
+}
+
 
 /* Main content styles */
 h1, h2, h3 {

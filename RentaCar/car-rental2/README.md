@@ -25,6 +25,8 @@ car-rental/
 |   |-- index.php
 |   |-- dashboard.php
 |   |-- admin-dashboard.php
+|   |-- manage-users.php
+|   |-- view-rentals.php
 |-- .gitignore
 |-- index.php
 |-- README.md

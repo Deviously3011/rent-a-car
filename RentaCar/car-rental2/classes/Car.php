@@ -22,18 +22,7 @@ class Car {
 
         return $cars;
     }
-    public function getCarById($carId) {
-        $sql = "SELECT * FROM cars WHERE CarID = ?";
-        $result = $this->db->query($sql, [$carId]);
-
-        if ($result instanceof mysqli_result && $result->num_rows > 0) {
-            $car = $result->fetch_assoc();
-            $result->close(); // Close the result set
-            return $car;
-        } else {
-            return null;
-        }
-    }
+   
     public function rentCar($carID, $customerID, $StartDate, $EndDate) {
         // Add your logic here to insert a rental record into the database
         $sql = "INSERT INTO rentals (CarID, CustomerID, StartDate, EndDate) VALUES (?, ?, ?, ?)";
@@ -51,7 +40,6 @@ class Car {
             return false; // Failed
         }
     }
-    
     
     
 
@@ -75,6 +63,7 @@ public function getCarPrice($carID) {
     
     
     
+    
     public function rentCarAndGenerateInvoice($carID, $CustomerID, $StartDate, $endDate, $price) {
         // Add your logic here to insert a rental record into the database
         $sql = "INSERT INTO rentals (CarID, CustomerID, StartDate, EndDate, Cost) VALUES (?, ?, ?, ?, ?)";
@@ -92,7 +81,9 @@ public function getCarPrice($carID) {
             return false; // Failed
         }
     }
+    
 }
+
 
 $car = new Car();
 

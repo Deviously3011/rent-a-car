@@ -35,7 +35,7 @@
             foreach ($cars as $car) {
                 echo '<div class="col-md-4 mb-4">';
                 echo '<div class="card shadow-sm">';
-                echo '<img class="card-img-top" src="/car-rental/assets/img/' . basename($car['Image']) . '" alt="' . $car['Brand'] . '">';
+                echo '<img class="card-img-top" src="assets/img/' . basename($car['Image']) . '" alt="' . $car['Brand'] . '">';
                 echo '<div class="card-body">';
                 echo '<h5 class="card-title">' . $car['Brand'] . ' ' . $car['Model'] . '</h5>';
         

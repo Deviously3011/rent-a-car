@@ -1,10 +1,13 @@
 <?php
 // Include the necessary classes and start the session
 require_once('../classes/Admin.php');
+require_once('../classes/Car.php');
+
 session_start();
 
 // Initialize the Admin class
 $admin = new Admin();
+$car = new Car();
 
 // Check if the admin is not logged in, redirect to login page
 if (!isset($_SESSION['admin'])) {
@@ -15,6 +18,22 @@ if (!isset($_SESSION['admin'])) {
 // Fetch admin-specific information
 $adminInfo = $_SESSION['admin'];
 
+// Handle car deletion
+if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['delete_car_id'])) {
+    $deleteCarID = $_GET['delete_car_id'];
+
+    // Perform the deletion here using your deleteCar method
+    $deleteResult = $admin->deleteCar($deleteCarID);
+
+    // Redirect to the admin dashboard or any other desired page after deletion
+    if ($deleteResult) {
+        header("Location: admin-dashboard.php");
+        exit();
+    } else {
+        echo '<p>Failed to delete car. Please try again.</p>';
+    }
+}
+
 // Handle car addition form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addCar'])) {
     // Process the form data and add the car to the database
@@ -23,21 +42,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addCar'])) {
     $year = $_POST['year'];
     $licensePlate = $_POST['licensePlate'];
     $availability = isset($_POST['availability']) ? 1 : 0; // Assuming a checkbox for availability
+    $carImage = $_FILES['carImage'];
 
-    // Handle image upload
-    if (isset($_FILES['carImage'])) {
-        $carImage = $_FILES['carImage'];
+    // Call the addCar function in the Admin class
+    $addCarResult = $admin->addCar($brand, $model, $year, $licensePlate, $availability, $carImage);
 
-        // Add your logic to insert the car into the database using the Admin class
-        // Example: $admin->addCar($brand, $model, $year, $licensePlate, $availability, $carImage);
-        // Don't forget to implement the 'addCar' method in your Admin class
-        // Redirect or display a success message as needed
-        $admin->addCar($brand, $model, $year, $licensePlate, $availability, $carImage);
+    // Redirect or display a success message as needed
+    if ($addCarResult) {
+        header("Location: admin-dashboard.php");
+        exit();
     } else {
-        // Handle the case where no image is uploaded
-        echo "Please upload an image.";
+        echo '<p>Failed to add car. Please try again.</p>';
     }
-    
 }
 ?>
 
@@ -86,12 +102,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addCar'])) {
 
 
 
-    <!-- Display List of Cars -->
-    <?php
-    
-    // Add PHP code to fetch and display list of cars
-    ?>
 
+    <!-- Display List of Cars in Admin Dashboard -->
+<h3>Car Data:</h3>
+<table border="1">
+    <tr>
+        <th>Car ID</th>
+        <th>Brand</th>
+        <th>Model</th>
+       
+        <th>Actions</th>
+    </tr>
+    <?php
+    // Fetch all cars
+    $cars = $car->getAllCars();
+
+    foreach ($cars as $car):
+    ?>
+        <tr>
+            <td><?php echo $car['CarID']; ?></td>
+            <td><?php echo $car['Brand']; ?></td>
+            <td><?php echo $car['Model']; ?></td>
+            
+            <!-- Edit and Delete buttons -->
+            <td>
+                <a href="edit-car.php?id=<?php echo $car['CarID']; ?>">Edit</a>
+                |
+                <a href="?delete_car_id=<?php echo $car['CarID']; ?>" onclick="return confirm('Are you sure you want to delete this car?')">Delete</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+
+    
 </div>
 
 <?php include('../includes/footer.php'); ?>
