@@ -1,4 +1,8 @@
 <?php
+session_start();
+
+
+
 // Include the RentalCalculator class
 require_once('../../classes/RentalCalculator.php');
 require_once('../../classes/Database.php'); // Assuming you have a Database class
@@ -6,15 +10,12 @@ require_once('../../classes/Car.php'); // Assuming you have a Car class
 require_once('../../classes/User.php'); // Assuming you have a User class
 
 // Create instances of the necessary classes
-$car = new Car();
+$car = new Car($database);
 $user = new User();
 
 // Retrieve car ID from the query parameter
 $carID = isset($_GET['carID']) ? htmlspecialchars($_GET['carID']) : '';
-
-// Display Car ID
-echo '<h2>Car ID:</h2>';
-echo '<p>' . $carID . '</p>';
+$carPrice = $car->getCarPrice($carID);
 
 // Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -22,58 +23,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $startDate = $_POST['startDate'];
     $endDate = $_POST['endDate'];
     $email = $_POST['email'];
+    $calculatedPrice = $_POST['price']; // Ensure this matches the name attribute of the input field
 
     // Retrieve customer ID based on email
     $customerID = $user->getCustomerIdByEmail($email);
 
-    // Get the car's price from the database
-  
-// Get the car's price from the database
-$carPrice = $car->getCarPrice($carID);
+    // Check for overlapping rentals
+    $overlappingRentals = $car->getOverlappingRentals($carID, $startDate, $endDate);
 
-// Debugging: Print the car price
-echo "Car Price: €" . $carPrice . "<br>";
-
-// Calculate the rental cost using the RentalCalculator class
-$rentalCost = RentalCalculator::calculateRentalCost($carPrice, $startDate, $endDate);
-
-// Debugging: Print the parameters and calculated rental cost
-echo "Car Price Per Month: €" . $carPrice . "<br>";
-echo "Start Date: " . $startDate . "<br>";
-echo "End Date: " . $endDate . "<br>";
-echo "Calculated Rental Cost: €" . number_format($rentalCost, 2) . "<br>";
-
-// Rent the car and generate invoice
-$rentalSuccess = $car->rentCarAndGenerateInvoice($carID, $customerID, $startDate, $endDate, $rentalCost);
-
-   // Calculate the rental cost using the RentalCalculator class
-$rentalCost = RentalCalculator::calculateRentalCost($carPrice, $startDate, $endDate);
-
-// Debugging: Print the calculated rental cost
-echo "Calculated Rental Cost: €" . number_format($rentalCost, 2) . "<br>";
-
-// Rent the car and generate invoice
-$rentalSuccess = $car->rentCarAndGenerateInvoice($carID, $customerID, $startDate, $endDate, $rentalCost);
-    // Rent the car and generate invoice
-    $rentalSuccess = $car->rentCarAndGenerateInvoice($carID, $customerID, $startDate, $endDate, $rentalCost);
-
-    if ($rentalSuccess) {
-        // Display the invoice to the user
-        echo '<div class="container">';
-        echo '<h1>Factuur</h1>';
-        echo '<p>Car Rental Details:</p>';
-        echo '<p>Car ID: ' . $carID . '</p>';
-        echo '<p>Start Date: ' . $startDate . '</p>';
-        echo '<p>End Date: ' . $endDate . '</p>';
-        echo '<p>Total Cost: €' . number_format($rentalCost, 2) . '</p>';
-        echo '</div>';
+    if (!empty($overlappingRentals)) {
+        // There are overlapping rentals, prevent processing and provide feedback
+        echo '<p>This car is not available for the selected period. Please choose different dates.</p>';
     } else {
-        echo '<p>Failed to process the rental. Please try again.</p>';
+        // No overlapping rentals, proceed with processing the rental
+        $rentalSuccess = $car->rentCarAndGenerateInvoice($carID, $customerID, $startDate, $endDate, $calculatedPrice);
+
+        if ($rentalSuccess) {
+            header("Location: purchase_successful.php");
+            exit();
+        } else {
+            echo '<p>Failed to process the rental. Please try again.</p>';
+        }
     }
 } else {
     // Default value if form is not yet submitted
     $rentalCost = 0;
 }
+
+  
+
 ?>
 
 
@@ -87,7 +65,7 @@ $rentalSuccess = $car->rentCarAndGenerateInvoice($carID, $customerID, $startDate
     <title>Checkout</title>
     <!-- Link to Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="path/to/your/custom/style.css"> <!-- Add your custom styles if needed -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 
 <body>
@@ -170,33 +148,30 @@ $rentalSuccess = $car->rentCarAndGenerateInvoice($carID, $customerID, $startDate
         </form>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                // Add event listeners for date change
-                const startDateInput = document.getElementById('startDate');
-                const endDateInput = document.getElementById('endDate');
-                const priceInput = document.getElementById('price');
+    // Add event listeners for date change
+    const startDateInput = document.getElementById('startDate');
+    const endDateInput = document.getElementById('endDate');
+    const priceInput = document.getElementById('price');
+    const carPricePerMonth = <?php echo $carPrice; ?>; // Use the retrieved car price
 
-                startDateInput.addEventListener('change', updatePrice);
-                endDateInput.addEventListener('change', updatePrice);
+    startDateInput.addEventListener('change', updatePrice);
+    endDateInput.addEventListener('change', updatePrice);
 
-                function updatePrice() {
-                    // Get selected dates
-                    const startDate = startDateInput.value;
-                    const endDate = endDateInput.value;
+    function updatePrice() {
+        // Get selected dates
+        const startDate = startDateInput.value;
+        const endDate = endDateInput.value;
 
-                    // Calculate the price using PHP values
-                    <?php
-                    // Get the car price per month (adjust this based on your actual pricing)
-                    $carPricePerMonth = 1000; // Replace with your actual value
-                    echo "const pricePerDay = " . ($carPricePerMonth * 12 / 365) . ";";
-                    ?>
+        // Calculate the price
+        const pricePerDay = (carPricePerMonth * 12) / 365;
+        const rentalPeriod = (new Date(endDate) - new Date(startDate)) / (24 * 60 * 60 * 1000); // Calculate days
+        const calculatedPrice = pricePerDay * rentalPeriod;
 
-                    const rentalPeriod = (new Date(endDate) - new Date(startDate)) / (24 * 60 * 60 * 1000); // Calculate days
-                    const calculatedPrice = pricePerDay * rentalPeriod;
+        // Update the price field
+        priceInput.value = calculatedPrice.toFixed(2); // Format to two decimal places
+    }
+});
 
-                    // Update the price field
-                    priceInput.value = calculatedPrice.toFixed(2); // Format to two decimal places
-                }
-            });
         </script>
     </div>
 

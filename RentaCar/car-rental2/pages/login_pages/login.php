@@ -9,7 +9,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // Initialize the Admin and User classes
-$admin = new Admin();
+$admin = new Admin($database);
 $user = new User();
 
 // Check if the form is submitted
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['admin'] = $loggedInAdmin;
 
         // Redirect to admin dashboard upon successful login
-        header("Location: ../admin-dashboard.php");
+        header("Location: ../admin_pages/admin-dashboard.php");
         exit();
     } else {
         // Attempt to log in the regular user

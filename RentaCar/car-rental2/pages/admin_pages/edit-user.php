@@ -1,7 +1,7 @@
 <?php
 // Include the Admin class and connect to the database
-require_once('../classes/Admin.php');
-$admin = new Admin();
+require_once('../../classes/Admin.php');
+$admin = new Admin($database);
 
 // Check if the user ID is provided in the URL
 if (isset($_GET['id'])) {
@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
 
         // Redirect to the home page or any other desired page after updating
         if ($updateResult) {
-            header("Location: home.php");
+            header("Location: manage-users.php");
             exit();
         } else {
             echo '<p>Failed to update user. Please try again.</p>';
@@ -65,11 +65,11 @@ if ($user !== null) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit User</title>
-    <!-- Bootstrap CSS or any other styling -->
-    <!-- Add any additional CSS or JavaScript dependencies here -->
+  
+    <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
-
+<?php include('../../includes/header.php'); ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">User Management</a>
     <!-- Add navigation links if needed -->
@@ -95,12 +95,6 @@ if ($user !== null) {
             <label for="email">Email:</label>
             <input type="email" name="email" class="form-control" value="<?php echo $email; ?>" required>
         </div>
-
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" name="password" class="form-control" required>
-        </div>
-
         <!-- Use different names for the submit buttons -->
         <button type="submit" name="updateUser" class="btn btn-primary">Save Changes</button>
 
@@ -110,6 +104,6 @@ if ($user !== null) {
 </div>
 
 <!-- Add any additional JavaScript at the end of the body if needed -->
-
+<?php include('../../includes/footer.php'); ?>
 </body>
 </html>

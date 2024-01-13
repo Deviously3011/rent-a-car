@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Gegenereerd op: 22 dec 2023 om 22:46
+-- Gegenereerd op: 14 jan 2024 om 00:09
 -- Serverversie: 10.4.28-MariaDB
 -- PHP-versie: 8.2.4
 
@@ -58,23 +58,19 @@ CREATE TABLE `cars` (
   `Availability` tinyint(1) NOT NULL,
   `Image` varchar(255) DEFAULT NULL,
   `PricePerMonth` decimal(10,2) NOT NULL,
-  `VehicleType` varchar(255) NOT NULL
+  `VehicleType` varchar(255) NOT NULL,
+  `description` varchar(1800) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `cars`
 --
 
-INSERT INTO `cars` (`CarID`, `Brand`, `Model`, `Year`, `LicensePlate`, `Availability`, `Image`, `PricePerMonth`, `VehicleType`) VALUES
-(2, 'porche', '4', 4, '23', 1, '../assets/img/657ac5c6a26b4_porsche.png', 0.00, ''),
-(3, 'porche', '4', 4, '23', 1, '../assets/img/657ac5e982ca5_porsche.png', 0.00, ''),
-(4, 'porche', '5', 34, '324324', 1, '../assets/img/657ac5f3e64e5_porsche.png', 0.00, ''),
-(5, 'porche', '7', 2, '123123', 1, '../assets/img/657ac608b1a01_porsche.png', 0.00, ''),
-(6, 'porche', '7', 2, '123123', 1, '../assets/img/657ac71484f9b_porsche.png', 0.00, ''),
-(7, 'asdsad', '5', 2, 'qweqwe', 0, '../assets/img/657c267ada998_657ac71484f9b_porsche.png', 0.00, ''),
-(8, 'asdsad', '5', 2, 'qweqwe', 0, '../assets/img/657c267aee982_657ac71484f9b_porsche.png', 0.00, ''),
-(9, 'porche', '2333', 2007, '324324', 0, '../assets/img/657c2691d7935_657ac5c6a26b4_porsche.png', 0.00, ''),
-(10, 'porche', '5', 2013, 'XorSMD', 1, '../assets/img/657c27ec20121_657ac5c6a26b4_porsche.png', 250.00, 'Electric');
+INSERT INTO `cars` (`CarID`, `Brand`, `Model`, `Year`, `LicensePlate`, `Availability`, `Image`, `PricePerMonth`, `VehicleType`, `description`) VALUES
+(24, 'Honda', 'Civic', 2021, 'XYZ789', 1, 'C:\\xampp\\htdocs\\car-rental2\\classes/../assets/img/65a2da04cf864_honda.png', 31.00, '', NULL),
+(25, 'Ford', 'Mustang', 2023, 'DEF456', 1, 'C:\\xampp\\htdocs\\car-rental2\\classes/../assets/img/65a2da156f696_ford.png', 120.00, '', NULL),
+(26, 'Tesla', 'Model 3', 2022, 'JKL012', 1, 'C:\\xampp\\htdocs\\car-rental2\\classes/../assets/img/65a2dadd37deb_tesla model3.png', 55.00, '', NULL),
+(27, 'Chevrolet', 'Suburban', 2022, 'GHI789', 1, 'C:\\xampp\\htdocs\\car-rental2\\classes/../assets/img/65a2dafc78cda_chevrolet.png', 65.00, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -100,15 +96,11 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`CustomerID`, `name`, `LastName`, `Address`, `LicenseNumber`, `PhoneNumber`, `email`, `password`, `country`, `adress`) VALUES
-(29, 'dino angel', 'angel', '', '', '', '2165302@talnet.nl', '$2y$10$c/rYic5GJaydJ99iZN59L.FMtPyjDNygpejejvQWKyJJJki1BShGa', NULL, 0),
-(30, 'ad', 'ad', '', '', '', 'jamesberca091@gmail.com', '$2y$10$GpsuAuGqBUFH5H8L2Hbfs.P.rV9Vq/MQB7tfANe9.s1Vih0H4J5Dm', NULL, 0),
-(32, 'ad', 'ad', '', '', '', 'ebukavy@hotmail.com', '$2y$10$8k.Ij7QXCaAGEFXQbkr7re3kKoYSbG0S78Ya1REgQI9Ja5xWkHhGi', NULL, 0),
-(33, 'ad', 'ad', '', '', '', 'aasd@gmail.com', '$2y$10$x7chHC1BLPKQrT0Z/c26supGXYSWRn8TX4woM3zgJ2o0cyYnlViua', NULL, 0),
-(34, 'ad', 'ad', '', '', '', 'dejahmarshall031@gmail.com', '$2y$10$.NOR9cvCE.OyG1g/YDSjmuvl.1oOo9V9SPoiD/QZOGJvFp6BfgiZm', NULL, 0),
+(34, 'biggestcaruser', 'jonathan', '', '', '', 'dejahmarshall031@gmail.com', '$2y$10$FzTScY28Jgqy8HcXIQFMF.i650etlI87TbHr5Kxpn5k/fFwVqkdKe', NULL, 0),
 (35, 'dino ', 'angel', '', '', '', 'dejahmarshall01@gmail.com', '$2y$10$09dOg9C0MqC1xx30Unr38.PNihP44gjAxM6.267z7z.3tqKCNDU2i', NULL, 0),
-(38, 'dino angel', 'an', '', '', '', 'dejahmarshall02@gmail.com', '$2y$10$od6YIus83sxG8kgMkYR9vOtSW8f3smbnYQOMDGY6zTWus28BK78z6', NULL, 0),
 (39, 'ad', 'ad', '', '', '', 'dejahmarshall0244@gmail.com', '$2y$10$yd.uHJlupGBClIwvw3OUWu.3wg5dnMYVt/iS7TzMmmdcOjRlJZ79.', NULL, 0),
-(40, 'way2', 'devious', '', '', '', 'dejahmarshall0133@gmail.com33', '$2y$10$bwbysNgacISLlfqYhkJ2OuNl/Pc.9UJoO94G2lrpSHyNnzmwcxGP.', NULL, 0);
+(40, 'way2', 'devious', '', '', '', 'dejahmarshall0133@gmail.com33', '$2y$10$bwbysNgacISLlfqYhkJ2OuNl/Pc.9UJoO94G2lrpSHyNnzmwcxGP.', NULL, 0),
+(41, 'dino ', 'angel', '', '', '', 'jamesberca0911@gmail.com', '$2y$10$Xkdr/ZAWkg5pcgF7wPwm3uPeulD0jNAFsSVITTqiRwnIb6Mfwobmq', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -144,73 +136,33 @@ CREATE TABLE `rentals` (
 --
 
 INSERT INTO `rentals` (`RentalID`, `StartDate`, `CustomerID`, `CarID`, `EndDate`, `Cost`, `EmployeeID`, `PickUpLocation`, `RentperiodDays`) VALUES
-(1, '2023-12-10', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(2, '2023-12-10', NULL, 2, '2023-12-30', 0.00, NULL, '', ''),
-(3, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(4, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(5, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(6, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(7, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(8, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(9, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(10, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(11, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(12, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(13, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(14, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(15, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(16, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(17, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(18, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(19, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(20, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(21, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(22, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(23, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(24, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(25, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(26, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(27, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(28, '2023-12-03', NULL, 2, '2023-12-31', 0.00, NULL, '', ''),
-(29, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(30, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(31, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(32, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(33, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(34, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(35, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(36, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(37, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(38, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(39, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(40, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(41, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(42, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(43, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(44, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(45, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(46, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(47, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(48, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', ''),
-(49, '2023-12-02', NULL, 10, '2023-12-31', 0.00, NULL, '', '');
+(101, '2024-01-07', 35, 24, '2024-01-14', 7.13, NULL, '', ''),
+(102, '2024-01-07', 35, 25, '2024-01-14', 27.62, NULL, '', ''),
+(103, '2024-03-21', 35, 24, '2024-04-21', 31.59, NULL, '', ''),
+(104, '2024-01-21', 35, 25, '2024-01-28', 27.62, NULL, '', '');
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `tempdata`
+-- Tabelstructuur voor tabel `reservations`
 --
 
-CREATE TABLE `tempdata` (
-  `FirstName` varchar(255) NOT NULL,
-  `LastName` varchar(255) NOT NULL,
-  `Email` varchar(255) NOT NULL,
-  `PhoneNumber` int(11) NOT NULL,
+CREATE TABLE `reservations` (
   `StartDate` date NOT NULL,
   `EndDate` date NOT NULL,
-  `CarId` int(255) NOT NULL,
-  `Price` decimal(10,2) NOT NULL,
-  `CustomerID` int(11) NOT NULL
+  `CarID` int(11) DEFAULT NULL,
+  `ReservationID` int(11) NOT NULL,
+  `CustomerID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `reservations`
+--
+
+INSERT INTO `reservations` (`StartDate`, `EndDate`, `CarID`, `ReservationID`, `CustomerID`) VALUES
+('2024-01-21', '2024-01-21', 24, 1, NULL),
+('2024-01-27', '2024-02-03', 24, 2, NULL),
+('2024-02-18', '2024-03-03', 26, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -264,6 +216,14 @@ ALTER TABLE `rentals`
   ADD KEY `EmployeeID` (`EmployeeID`);
 
 --
+-- Indexen voor tabel `reservations`
+--
+ALTER TABLE `reservations`
+  ADD PRIMARY KEY (`ReservationID`),
+  ADD KEY `idx_car_id` (`CarID`),
+  ADD KEY `idx_start_date_end_date` (`StartDate`,`EndDate`);
+
+--
 -- Indexen voor tabel `users`
 --
 ALTER TABLE `users`
@@ -283,13 +243,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT voor een tabel `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `CarID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `CarID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT voor een tabel `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT voor een tabel `employees`
@@ -301,7 +261,13 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT voor een tabel `rentals`
 --
 ALTER TABLE `rentals`
-  MODIFY `RentalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `RentalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+
+--
+-- AUTO_INCREMENT voor een tabel `reservations`
+--
+ALTER TABLE `reservations`
+  MODIFY `ReservationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
@@ -327,6 +293,12 @@ ALTER TABLE `rentals`
   ADD CONSTRAINT `rentals_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`),
   ADD CONSTRAINT `rentals_ibfk_2` FOREIGN KEY (`CarID`) REFERENCES `cars` (`CarID`),
   ADD CONSTRAINT `rentals_ibfk_3` FOREIGN KEY (`EmployeeID`) REFERENCES `employees` (`EmployeeID`);
+
+--
+-- Beperkingen voor tabel `reservations`
+--
+ALTER TABLE `reservations`
+  ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`CarID`) REFERENCES `cars` (`CarID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

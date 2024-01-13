@@ -1,3 +1,5 @@
+
+
 <?php
 
 class RentalCalculator
@@ -12,3 +14,4 @@ class RentalCalculator
 }
 
 ?>
+    

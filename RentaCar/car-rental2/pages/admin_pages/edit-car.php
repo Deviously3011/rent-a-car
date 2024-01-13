@@ -1,11 +1,11 @@
 <?php
-require_once('../classes/Admin.php');
-require_once('../classes/Car.php');
+require_once('../../classes/Admin.php');
+require_once('../../classes/Car.php');
 
 session_start();
 
-$admin = new Admin();
-$car = new Car();
+$admin = new Admin($database);
+$car = new Car($database);
 
 // Check if the admin is not logged in, redirect to login page
 if (!isset($_SESSION['admin'])) {
@@ -77,9 +77,10 @@ if (isset($_GET['id'])) {
     <title>Edit Car</title>
     <!-- Bootstrap CSS or any other styling -->
     <!-- Add any additional CSS or JavaScript dependencies here -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 <body>
-
+<?php include('../../includes/header.php'); ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Car Management</a>
     <!-- Add navigation links if needed -->

@@ -10,23 +10,32 @@ car-rental/
 |   |-- User.php
 |   |-- Car.php
 |   |-- Admin.php
+|   |-- RentalCalculator.php
 |-- config/
 |   |-- db_config.php
 |-- includes/
 |   |-- header.php
 |   |-- footer.php
 |-- pages/
+|   |-- admin_pages/
+|   |   |-- admin-dashboard.php
+|   |   |-- edit-car.php
+|   |   |-- edit-user.php
+|   |   |-- manage-users.php
+|   |   |-- view-rentals..php
 |   |-- login_pages/
 |   |   |-- login.php
 |   |   |-- logout.php
 |   |   |-- signup.php  
-|   |-- Renting/
+|   |-- car_pages/
+|   |   |-- car_detail_template.php
+|   |   |-- car_details.php
+|   |-- renting/
 |   |   |-- checkout.php
-|   |-- index.php
-|   |-- dashboard.php
-|   |-- admin-dashboard.php
-|   |-- manage-users.php
-|   |-- view-rentals.php
+|   |   |-- factuur.php
+|   |   |-- purchase_succesful.php
+|   |-- user-pages/
+|   |   |-- dashboard.php
 |-- .gitignore
 |-- index.php
 |-- README.md

@@ -32,15 +32,17 @@ if (session_status() == PHP_SESSION_NONE) {
                         <?php
                         // Initialize the User and Admin classes
                         $user = new User();
-                        $admin = new Admin();
+                        $admin = new Admin($database);
 
                         // Check if the user is logged in
                         if (isset($_SESSION['user'])) {
                             echo '<li class="nav-item"><a class="nav-link" href="/car-rental2/pages/login_pages/logout.php">Logout</a></li>';
                         } elseif (isset($_SESSION['admin'])) {
-                            echo '<li class="nav-item"><a class="nav-link" href="/car-rental2/pages/admin-dashboard.php">Admin Dashboard</a></li>';
-                            echo '<li class="nav-item"><a class="nav-link" href="/car-rental2/pages/manage-users.php">User Management</a></li>';
+                            echo '<li class="nav-item"><a class="nav-link" href="/car-rental2/pages/admin_pages/admin-dashboard.php">Admin Dashboard</a></li>';
+                            echo '<li class="nav-item"><a class="nav-link" href="/car-rental2/pages/admin_pages/manage-users.php">User Management</a></li>';
+                            echo '<li class="nav-item"><a class="nav-link" href="/car-rental2/pages/admin_pages/view-rentals.php">view-rentals</a></li>';
                             echo '<li class="nav-item"><a class="nav-link" href="/car-rental2/pages/login_pages/logout.php">Logout</a></li>';
+                            
                         } else {
                             echo '<li class="nav-item"><a class="nav-link" href="/car-rental2/pages/login_pages/login.php">Login</a></li>';
                             echo '<li class="nav-item"><a class="nav-link" href="/car-rental2/pages/login_pages/signup.php">Signup</a></li>';

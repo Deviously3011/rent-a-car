@@ -8,7 +8,7 @@
     <!-- Link to Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Add any additional CSS or JavaScript dependencies here -->
+    
     <script src="assets/js/main.js" defer></script>
 </head>
 
@@ -21,47 +21,54 @@
         <h1>Welcome to Car Rental</h1>
 
         <?php
-        // Include the Car class
-        require_once('classes/Car.php');
+        try {
+            // Include the Car class
+            require_once('classes/Car.php');
 
-        // Instantiate the Car class
-        $car = new Car();
+            // Instantiate the Car class
+            $car = new Car($database);
 
-        // Get all cars from the database
-        $cars = $car->getAllCars();
+            // Get all cars from the database
+            $cars = $car->getAllCars();
 
-        if ($cars) {
-            echo '<div class="row">';
-            foreach ($cars as $car) {
-                echo '<div class="col-md-4 mb-4">';
-                echo '<div class="card shadow-sm">';
-                echo '<img class="card-img-top" src="assets/img/' . basename($car['Image']) . '" alt="' . $car['Brand'] . '">';
-                echo '<div class="card-body">';
-                echo '<h5 class="card-title">' . $car['Brand'] . ' ' . $car['Model'] . '</h5>';
-        
-                // "Details" button
-                echo '<button class="btn btn-primary details-btn" data-toggle="collapse" data-target="#carDetails' . $car['CarID'] . '">Details</button>';
-        
-                // Form for "Rent" button
-                echo '<form action="pages/renting/checkout.php" method="get">';
-                echo '<input type="hidden" name="carID" value="' . $car['CarID'] . '">';
-                echo '<button type="submit" class="btn btn-success rent-btn">Rent</button>';
-                echo '</form>';
-        
-                echo '<div class="collapse" id="carDetails' . $car['CarID'] . '">';
-                echo '<p class="card-text">Year: ' . $car['Year'] . '</p>';
-                echo '<p class="card-text">License Plate: ' . $car['LicensePlate'] . '</p>';
-                echo '<p class="card-text">Availability: ' . ($car['Availability'] ? 'Available' : 'Not Available') . '</p>';
-                echo '</div>'; // Close collapse
-                echo '</div>'; // Close card-body
-                echo '</div>'; // Close card
-                echo '</div>'; // Close col-md-4
+            // Debugging: Check the content of $cars
+            if ($cars) {
+                echo '<div class="row">';
+                foreach ($cars as $car) {
+                    echo '<div class="col-md-4 mb-4">';
+                    echo '<div class="card shadow-sm">';
+                    echo '<img class="card-img-top" src="assets/img/' . basename($car['Image']) . '" alt="' . $car['Brand'] . '">';
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">' . $car['Brand'] . ' ' . $car['Model'] . '</h5>';
+
+                    // "Details" button
+                    echo '<button class="btn btn-primary details-btn">';
+                    echo '<a href="pages/car_pages/car_details.php?carID=' . $car['CarID'] . '">Details</a>';
+                    echo '</button>';
+
+                    // Form for "Rent" button
+                    echo '<form action="pages/renting/checkout.php" method="get">';
+                    echo '<input type="hidden" name="carID" value="' . $car['CarID'] . '">';
+                    echo '<button type="submit" class="btn btn-success rent-btn">Rent</button>';
+                    echo '</form>';
+
+                    echo '<div class="collapse" id="carDetails' . $car['CarID'] . '">';
+                    echo '<p class="card-text">Year: ' . $car['Year'] . '</p>';
+                    echo '<p class="card-text">License Plate: ' . $car['LicensePlate'] . '</p>';
+                    echo '<p class="card-text">Availability: ' . ($car['Availability'] ? 'Available' : 'Not Available') . '</p>';
+                    echo '</div>'; // Close collapse
+                    echo '</div>'; // Close card-body
+                    echo '</div>'; // Close card
+                    echo '</div>'; // Close col-md-4
+                }
+                echo '</div>';
+            } else {
+                echo '<p>No cars available.</p>';
             }
-            echo '</div>'; // Close row
-        } else {
-            echo '<p>No cars available.</p>';
+        } catch (Exception $e) {
+            // Handle exceptions if any
+            echo '<p>Error: ' . $e->getMessage() . '</p>';
         }
-        
         ?>
 
     </div>
