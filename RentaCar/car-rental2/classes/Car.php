@@ -66,6 +66,7 @@ class Car {
         return $result !== false;
     }
 
+
     public function getOverlappingRentals($carID, $startDate, $endDate) {
         $sql = "SELECT * FROM rentals 
                 WHERE CarID = ? 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Gegenereerd op: 14 jan 2024 om 00:09
+-- Gegenereerd op: 17 jan 2024 om 19:50
 -- Serverversie: 10.4.28-MariaDB
 -- PHP-versie: 8.2.4
 
@@ -128,18 +128,23 @@ CREATE TABLE `rentals` (
   `Cost` decimal(10,2) NOT NULL,
   `EmployeeID` int(11) DEFAULT NULL,
   `PickUpLocation` varchar(255) NOT NULL,
-  `RentperiodDays` varchar(255) NOT NULL
+  `RentperiodDays` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `LastName` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `rentals`
 --
 
-INSERT INTO `rentals` (`RentalID`, `StartDate`, `CustomerID`, `CarID`, `EndDate`, `Cost`, `EmployeeID`, `PickUpLocation`, `RentperiodDays`) VALUES
-(101, '2024-01-07', 35, 24, '2024-01-14', 7.13, NULL, '', ''),
-(102, '2024-01-07', 35, 25, '2024-01-14', 27.62, NULL, '', ''),
-(103, '2024-03-21', 35, 24, '2024-04-21', 31.59, NULL, '', ''),
-(104, '2024-01-21', 35, 25, '2024-01-28', 27.62, NULL, '', '');
+INSERT INTO `rentals` (`RentalID`, `StartDate`, `CustomerID`, `CarID`, `EndDate`, `Cost`, `EmployeeID`, `PickUpLocation`, `RentperiodDays`, `name`, `LastName`) VALUES
+(101, '2024-01-07', 35, 24, '2024-01-14', 7.13, NULL, '', '', '', ''),
+(102, '2024-01-07', 35, 25, '2024-01-14', 27.62, NULL, '', '', '', ''),
+(103, '2024-03-21', 35, 24, '2024-04-21', 31.59, NULL, '', '', '', ''),
+(104, '2024-01-21', 35, 25, '2024-01-28', 27.62, NULL, '', '', '', ''),
+(105, '2024-03-18', 35, 24, '2024-04-28', 41.79, NULL, '', '', '', ''),
+(106, '2024-01-04', NULL, 24, '2024-01-06', 2.04, NULL, '', '', '', ''),
+(107, '2024-01-17', NULL, 25, '2024-01-31', 55.23, NULL, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -152,30 +157,20 @@ CREATE TABLE `reservations` (
   `EndDate` date NOT NULL,
   `CarID` int(11) DEFAULT NULL,
   `ReservationID` int(11) NOT NULL,
-  `CustomerID` int(11) DEFAULT NULL
+  `CustomerID` int(11) DEFAULT NULL,
+  `Firstname` varchar(255) NOT NULL,
+  `LastName` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `reservations`
 --
 
-INSERT INTO `reservations` (`StartDate`, `EndDate`, `CarID`, `ReservationID`, `CustomerID`) VALUES
-('2024-01-21', '2024-01-21', 24, 1, NULL),
-('2024-01-27', '2024-02-03', 24, 2, NULL),
-('2024-02-18', '2024-03-03', 26, 3, NULL);
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `users`
---
-
-CREATE TABLE `users` (
-  `UserID` int(11) NOT NULL,
-  `UserName` varchar(255) NOT NULL,
-  `Password` varchar(255) NOT NULL,
-  `Role` enum('Customer','Employee') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `reservations` (`StartDate`, `EndDate`, `CarID`, `ReservationID`, `CustomerID`, `Firstname`, `LastName`) VALUES
+('2024-01-21', '2024-01-21', 24, 1, NULL, '', ''),
+('2024-01-27', '2024-02-03', 24, 2, NULL, '', ''),
+('2024-02-18', '2024-03-03', 26, 3, NULL, '', ''),
+('2024-01-01', '2024-01-03', 24, 4, NULL, '', '');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -213,7 +208,9 @@ ALTER TABLE `rentals`
   ADD PRIMARY KEY (`RentalID`),
   ADD KEY `CustomerID` (`CustomerID`),
   ADD KEY `CarID` (`CarID`),
-  ADD KEY `EmployeeID` (`EmployeeID`);
+  ADD KEY `EmployeeID` (`EmployeeID`),
+  ADD KEY `name` (`name`),
+  ADD KEY `LastName` (`LastName`);
 
 --
 -- Indexen voor tabel `reservations`
@@ -221,13 +218,10 @@ ALTER TABLE `rentals`
 ALTER TABLE `reservations`
   ADD PRIMARY KEY (`ReservationID`),
   ADD KEY `idx_car_id` (`CarID`),
-  ADD KEY `idx_start_date_end_date` (`StartDate`,`EndDate`);
-
---
--- Indexen voor tabel `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`UserID`);
+  ADD KEY `idx_start_date_end_date` (`StartDate`,`EndDate`),
+  ADD KEY `name` (`Firstname`),
+  ADD KEY `LastName` (`LastName`),
+  ADD KEY `Firstname` (`Firstname`);
 
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen
@@ -261,19 +255,13 @@ ALTER TABLE `employees`
 -- AUTO_INCREMENT voor een tabel `rentals`
 --
 ALTER TABLE `rentals`
-  MODIFY `RentalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `RentalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT voor een tabel `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `ReservationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT voor een tabel `users`
---
-ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ReservationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Beperkingen voor geëxporteerde tabellen

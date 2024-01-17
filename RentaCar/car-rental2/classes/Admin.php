@@ -204,6 +204,34 @@ class Admin {
             return false; // Failed
         }
     }
+    public function cancelRent($rentalID) {
+        $sql = "DELETE FROM rentals WHERE RentalID = ?";
+        $params = [$rentalID];
+
+        try {
+            $this->db->query($sql, $params);
+            return true; // Success
+        } catch (Exception $e) {
+            // Log the error for further investigation
+            error_log("Error canceling rent: " . $e->getMessage());
+            return false; // Failed
+        }
+    }
+
+    public function cancelReservation($reservationID) {
+        $sql = "DELETE FROM reservations WHERE ReservationID = ?";
+        $params = [$reservationID];
+
+        try {
+            $this->db->query($sql, $params);
+            return true; // Success
+        } catch (Exception $e) {
+            // Log the error for further investigation
+            error_log("Error canceling reservation: " . $e->getMessage());
+            return false; // Failed
+        }
+    }
+    
 }
 
 $admin = new Admin($database);

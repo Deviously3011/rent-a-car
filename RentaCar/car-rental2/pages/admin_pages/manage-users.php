@@ -21,10 +21,10 @@ if (isset($_GET['delete_id'])) {
     $deleteResult = $admin->deleteUser($deleteUserID);
 
     if ($deleteResult) {
-        echo '<p>User deleted successfully.</p>';
+        echo '<p class="success-message">User deleted successfully.</p>';
         // You may choose to refresh the page or redirect after deletion
     } else {
-        echo '<p>Failed to delete user. Please try again.</p>';
+        echo '<p class="error-message">Failed to delete user. Please try again.</p>';
     }
 }
 
@@ -41,6 +41,35 @@ $users = $admin->getAllUsers();
     <title>Admin Dashboard - Manage Users</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- Add any additional CSS or JavaScript dependencies here -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td a {
+            text-decoration: none;
+        }
+
+        .success-message {
+            color: green;
+        }
+
+        .error-message {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 
@@ -79,7 +108,7 @@ $users = $admin->getAllUsers();
 
 <?php include('../../includes/footer.php'); ?>
 
-<!-- Add any additional JavaScript at the end of the body if needed -->
+
 
 </body>
 </html>

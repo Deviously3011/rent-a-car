@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['delete_car_id'])) {
         header("Location: admin-dashboard.php");
         exit();
     } else {
-        echo '<p>Failed to delete car. Please try again.</p>';
+        echo '<p class="text-danger">Failed to delete car. Please try again.</p>';
     }
 }
 
@@ -54,95 +54,131 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addCar'])) {
         header("Location: admin-dashboard.php");
         exit();
     } else {
-        echo '<p>Failed to add car. Please try again.</p>';
+        echo '<p class="text-danger">Failed to add car. Please try again.</p>';
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Car Rental</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- Add any additional CSS or JavaScript dependencies here -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
+
 <body>
 
-<?php include('../../includes/header.php'); ?>
+    <?php include('../../includes/header.php'); ?>
 
-<div class="container">
-    <h2>Admin Dashboard</h2>
+    <div class="container">
+        <h2>Admin Dashboard</h2>
 
-    <p>Welcome, <?php echo $adminInfo['username']; ?>!</p>
+        <p>Welcome, <?php echo $adminInfo['username']; ?>!</p>
 
-    <h3>Manage Cars:</h3>
+        <h3>Manage Cars:</h3>
 
-    <!-- Car Addition Form -->
-<form method="post" action="" enctype="multipart/form-data">
-    <label for="brand">Brand:</label>
-    <input type="text" id="brand" name="brand" required>
+       <!-- Car Addition Form -->
+<div class="card mt-4">
+    <div class="card-body">
+        <h3 class="card-title">Add New Car</h3>
+        <form method="post" action="" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="brand">Brand:</label>
+                <input type="text" class="form-control" id="brand" name="brand" required>
+            </div>
 
-    <label for="model">Model:</label>
-    <input type="text" id="model" name="model" required>
+            <div class="form-group">
+                <label for="model">Model:</label>
+                <input type="text" class="form-control" id="model" name="model" required>
+            </div>
 
-    <label for="year">Year:</label>
-    <input type="number" id="year" name="year" required>
+            <div class="form-group">
+                <label for="year">Year:</label>
+                <input type="number" class="form-control" id="year" name="year" required>
+            </div>
 
-    <label for="licensePlate">License Plate:</label>
-    <input type="text" id="licensePlate" name="licensePlate" required>
+            <div class="form-group">
+                <label for="licensePlate">License Plate:</label>
+                <input type="text" class="form-control" id="licensePlate" name="licensePlate" required>
+            </div>
 
-    <label for="availability">Availability:</label>
-    <input type="checkbox" id="availability" name="availability">
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="availability" name="availability">
+                <label class="form-check-label" for="availability">Available</label>
+            </div>
 
-    <label for="carImage">Car Image:</label>
-    <input type="file" id="carImage" name="carImage" accept="image/*" required>
+            <div class="form-group">
+                <label for="carImage">Car Image:</label>
+                <input type="file" class="form-control-file" id="carImage" name="carImage" accept="image/*" required>
+            </div>
 
-    <button type="submit" name="addCar">Add Car</button>
-</form>
-
-
-
-
-    <!-- Display List of Cars in Admin Dashboard -->
-<h3>Car Data:</h3>
-<table border="1">
-    <tr>
-        <th>Car ID</th>
-        <th>Brand</th>
-        <th>Model</th>
-       
-        <th>Actions</th>
-    </tr>
-    <?php
-    // Fetch all cars
-    $cars = $car->getAllCars();
-
-    foreach ($cars as $car):
-    ?>
-        <tr>
-            <td><?php echo $car['CarID']; ?></td>
-            <td><?php echo $car['Brand']; ?></td>
-            <td><?php echo $car['Model']; ?></td>
-            
-            <!-- Edit and Delete buttons -->
-            <td>
-                <a href="edit-car.php?id=<?php echo $car['CarID']; ?>">Edit</a>
-                |
-                <a href="?delete_car_id=<?php echo $car['CarID']; ?>" onclick="return confirm('Are you sure you want to delete this car?')">Delete</a>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-</table>
-
-
-    
+            <button type="submit" name="addCar" class="btn btn-primary">Add Car</button>
+        </form>
+    </div>
 </div>
 
-<?php include('../../includes/footer.php'); ?>
+        <!-- Display List of Cars in Admin Dashboard -->
+        <h3>Car Data:</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Car ID</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Fetch all cars
+                $cars = $car->getAllCars();
 
-<!-- Add any additional JavaScript at the end of the body if needed -->
+                foreach ($cars as $car):
+                ?>
+                    <tr>
+                        <td><?php echo $car['CarID']; ?></td>
+                        <td><?php echo $car['Brand']; ?></td>
+                        <td><?php echo $car['Model']; ?></td>
+
+                        <!-- Edit and Delete buttons -->
+                        <td>
+                            <a href="edit-car.php?id=<?php echo $car['CarID']; ?>" class="btn btn-info">Edit</a>
+                            <a href="?delete_car_id=<?php echo $car['CarID']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this car?')">Delete</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?php include('../../includes/footer.php'); ?>
+
+    <!-- Add any additional JavaScript at the end of the body if needed -->
 
 </body>
+
 </html>

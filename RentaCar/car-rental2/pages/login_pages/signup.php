@@ -77,7 +77,7 @@ $user->closeConnection();
 
     <?php include('../../includes/footer.php'); ?>
 
-    <!-- Add any additional JavaScript at the end of the body if needed -->
+
 
 </body>
 </html>

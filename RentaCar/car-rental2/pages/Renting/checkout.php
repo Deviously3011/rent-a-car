@@ -39,6 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $rentalSuccess = $car->rentCarAndGenerateInvoice($carID, $customerID, $startDate, $endDate, $calculatedPrice);
 
         if ($rentalSuccess) {
+            // Set session variables for the invoice
+            $_SESSION['carID'] = $carID;
+            $_SESSION['startDate'] = $startDate;
+            $_SESSION['endDate'] = $endDate;
+            $_SESSION['calculatedPrice'] = $calculatedPrice;
+
             header("Location: purchase_successful.php");
             exit();
         } else {

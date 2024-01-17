@@ -1,66 +1,110 @@
-<?php
-// Start the session
-session_start();
+<!DOCTYPE html>
+<html lang="en">
 
-// Retrieve variables from the session
-$carID = isset($_SESSION['carID']) ? $_SESSION['carID'] : '';
-$startDate = isset($_SESSION['startDate']) ? $_SESSION['startDate'] : '';
-$endDate = isset($_SESSION['endDate']) ? $_SESSION['endDate'] : '';
-$calculatedPrice = isset($_SESSION['calculatedPrice']) ? $_SESSION['calculatedPrice'] : '';
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factuur</title>
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
 
-// Display the invoice
-echo '<div class="container">';
-echo '<h1>Factuur</h1>';
-echo '<p>Car Rental Details:</p>';
-echo '<p>Car ID: ' . $carID . '</p>';
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-// Check if $startDate, $endDate, and $calculatedPrice are set before using them
-if (!empty($startDate)) {
-    echo '<p>Start Date: ' . $startDate . '</p>';
-} else {
-    echo '<p>Start Date: N/A</p>';
-}
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-if (!empty($endDate)) {
-    echo '<p>End Date: ' . $endDate . '</p>';
-} else {
-    echo '<p>End Date: N/A</p>';
-}
+        .invoice-details {
+            margin-bottom: 30px;
+        }
 
-if (!empty($calculatedPrice)) {
-    echo '<p>Total Cost: €' . number_format($calculatedPrice, 2) . '</p>';
-} else {
-    echo '<p>Total Cost: N/A</p>';
-}
+        .invoice-details p {
+            margin: 5px 0;
+        }
 
-echo '</div>';
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
 
-// Generate an associative array with invoice details
-$invoiceDetails = array(
-    'Car ID' => $carID,
-    'Start Date' => !empty($startDate) ? $startDate : 'N/A',
-    'End Date' => !empty($endDate) ? $endDate : 'N/A',
-    'Total Cost' => !empty($calculatedPrice) ? number_format($calculatedPrice, 2) : 'N/A',
-);
+        .invoice-table th,
+        .invoice-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
 
-// Clear the session variables
-session_destroy();
+        .invoice-total {
+            text-align: right;
+        }
 
-// Create a Word document and download it
-header("Content-type: application/vnd.ms-word");
-header("Content-Disposition: attachment;Filename=factuur.doc");
+        .invoice-footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
 
-echo '<html>';
-echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
-echo '<body>';
-echo '<div class="container">';
-echo '<h1>Factuur</h1>';
-echo '<p>Car Rental Details:</p>';
-echo '<p>Car ID: ' . $carID . '</p>';
-echo '<p>Start Date: ' . (!empty($startDate) ? $startDate : 'N/A') . '</p>';
-echo '<p>End Date: ' . (!empty($endDate) ? $endDate : 'N/A') . '</p>';
-echo '<p>Total Cost: €' . (!empty($calculatedPrice) ? number_format($calculatedPrice, 2) : 'N/A') . '</p>';
-echo '</div>';
-echo '</body>';
-echo '</html>';
-?>
+<body>
+
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <h1>Factuur</h1>
+        </div>
+
+        <div class="invoice-details">
+            <p><strong>Bedrijfsnaam:</strong> AlwaysRentable</p>
+            <p><strong>Klantnaam:</strong>Customername</p>
+            <p><strong>Factuurnummer:</strong> 2022001</p>
+            <p><strong>Factuurdatum:</strong> 2024-01-17</p>
+        </div>
+
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Auto</th>
+                    <th>Aantal dagen</th>
+                    <th>Prijs per dag</th>
+                    <th>Totaal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CarName</td>
+                    <td>2</td>
+                    <td>€25.00</td>
+                    <td>€50.00</td>
+                </tr>
+                
+            </tbody>
+        </table>
+
+        <div class="invoice-total">
+            <p><strong>Totaal te betalen:</strong> €50.00</p>
+        </div>
+
+        <div class="invoice-footer">
+            <p>Bedankt voor uw zaken!</p>
+        </div>
+    </div>
+
+    <!-- Link to Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -1,3 +1,7 @@
+if you want to create another admin run the admin_create.php script 
+with the chosen credentials once
+website by lenny, en dejah(2165302)
+
 --the file structure for this project 
 car-rental/
 |-- assets/

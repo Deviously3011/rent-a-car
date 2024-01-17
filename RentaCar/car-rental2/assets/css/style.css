@@ -3,14 +3,6 @@ body, h1, h2, h3, p, ul, li {
     margin: 0;
     padding: 0;
 }
-
-body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
-}
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -24,56 +16,16 @@ header {
     padding: 10px 0;
 }
 
-.upper-navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo-container {
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
-.login-signup-container a {
-    color: #fff;
-    text-decoration: none;
-    margin-left: 15px;
-}
-
-/* Navbar styles */
-.navbar {
-    border-bottom: 1px solid #ddd; /* Add a border to separate the navbar from the content */
-}
-
-.navbar-nav {
-    display: flex;
-    align-items: center;
-}
-
-.navbar-nav .nav-link {
-    color: #4285f4; /* Google Blue */
-    margin-right: 20px;
-    font-weight: bold;
-}
-
-/* Responsive styles */
-@media screen and (max-width: 768px) {
-    .upper-navbar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .login-signup-container {
-        margin-top: 10px;
-    }
-}
 
 
-/* Main content styles */
-h1, h2, h3 {
-    color: #4285f4; /* Google Blue */
-}
+
+
+
+
+
+
+
+
 
 /* Footer styles */
 footer {
@@ -86,53 +38,35 @@ footer {
 
 /* Responsive styles */
 @media screen and (max-width: 768px) {
-    .upper-navbar {
+   
+
+}
+    /* login styles */
+    .login-form {
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        max-width: 300px;
+        margin: 0 auto;
     }
 
-    .login-signup-container {
-        margin-top: 10px;
+    .login-form label,
+    .login-form input,
+    .login-form button {
+        margin-bottom: 15px;
     }
 
-    .bottom-navbar {
-        margin-top: 10px;
+    .login-form button {
+        background-color: #4285f4; /* Google Blue */
+        color: #fff;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
     }
 
-    .bottom-navbar ul {
-        flex-direction: column;
+    .login-form button:hover {
+        background-color: #3c78d8; /* Darker shade of Google Blue */
     }
 
-    .bottom-navbar li {
-        margin-bottom: 10px;
-    }
-}
-/* login styles */
-.login-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-    margin: 0 auto;
-}
-
-.login-form label,
-.login-form input,
-.login-form button {
-    margin-bottom: 15px;
-}
-
-.login-form button {
-    background-color: #4285f4; /* Google Blue */
-    color: #fff;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-}
-
-.login-form button:hover {
-    background-color: #3c78d8; /* Darker shade of Google Blue */
-}
-/* Add these styles to your existing style.css file */
 
 .car-list {
     display: flex;
@@ -140,43 +74,23 @@ footer {
     gap: 20px;
 }
 
-.car-item {
-    position: relative;
-}
+
 
 .details-btn {
     position: absolute;
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #3498db;
-    color: #fff;
+    
+    color: #fff; /* Set text color to white */
     border: none;
-    padding: 5px 10px;
+    padding: 8px 16px; /* Adjust padding for better visibility */
     cursor: pointer;
+    z-index: 1; /* Ensure the button is above other elements */
 }
 
-.details-box {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    text-align: left;
-}
 
-.car-item:hover .details-box {
-    display: block;
-}
 
-.rent-btn {
-    background-color: #27ae60;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    margin-top: 10px;
-    cursor: pointer;
-}
+
+
+
