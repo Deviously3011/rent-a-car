@@ -25,7 +25,7 @@ if (session_status() == PHP_SESSION_NONE) {
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="/car-rental2/index.php">Car Rental</a>
+                <a class="navbar-brand" href="/car-rental2/index.php">AlwaysRentable</a>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
