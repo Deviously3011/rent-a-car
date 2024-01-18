@@ -1,3 +1,7 @@
+<?php
+
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -107,7 +111,7 @@
 require_once('classes/Admin.php');
 require_once('classes/User.php');
 
-session_start();
+
 
 $admin = new Admin($database);
 $user = new User();
